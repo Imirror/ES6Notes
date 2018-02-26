@@ -58,7 +58,6 @@ function* gen() {
 
     console.log('after yield');
 }
-
 const g = gen();
 outside // "outside"
 g.next();//before yield  in yield

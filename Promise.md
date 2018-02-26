@@ -57,20 +57,39 @@ Generator 函数与 Promise 的结合
 
 事件轮询
 
-```javaScript
+补充
+
+```
 setTimeout(function () {
-  console.log('three');
+  console.log('timeout');
 }, 0);
 
 Promise.resolve().then(function () {
-  console.log('two');
+
+  console.log('resolve');
+
 });
 
-console.log('one');
+console.log('synchronize');
 
-// one
-// two
-// three
+// synchronize
+
+// resolve
+
+// timeout
+
 ```
+
+
+```
+- 所有同步任务都在主线程上的栈中执行。
+- 主线程之外，还存在一个"任务队列"（task queue）。**只要异步任务有了运行结果**，就在"任务队列"之中放置一个事件。
+- 一旦"栈"中的所有同步任务执行完毕，系统就会读取"任务队列"，选择出需要首先执行的任务（由浏览器决定，并不按序）。
+
+SETIMMEDIATE该方法用来把一些需要长时间运行的操作放在一个回调函数里,在浏览器完成后面的其他语句后,就立刻执行这个回调函数
+
+process.nextTick被放到队头
+
 ## 补充
 promise内部catch的函数不会反应到外界，可选择把错误抛出。
+```
